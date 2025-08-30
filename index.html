@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stajor — Корпорация по отслеживанию аномалий</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:#000; color:#e0e0e0; }
+
+h1,h2,h3 { font-family:'Montserrat',sans-serif; color:#fff; }
+
+.site-header { display:flex; justify-content:space-between; align-items:center; padding:1rem 5%; background:#111; border-bottom:2px solid #222; position:sticky; top:0; z-index:1000; }
+.logo { display:flex; align-items:center; gap:0.5rem; font-size:1.3rem; font-weight:600; color:#e0e0e0; }
+.logo img { height:40px; width:40px; }
+
+.slider {
+  position:relative; width:100%; height:600px; overflow:hidden; margin:2rem 0; cursor:grab;
+}
+.slides { display:flex; transition: transform 0.5s ease-in-out; height:100%; }
+.slide {
+  min-width:100%; height:100%; background-size:cover; background-position:center; display:flex;
+  align-items:center; justify-content:center; position:relative;
+}
+.slide::before {
+  content:""; position:absolute; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.25); z-index:1;
+}
+.overlay {
+  position:relative; z-index:2; background:transparent; padding:1rem 2rem; text-align:center;
+  max-width:70%; color:#fff;
+}
+.overlay h2 { font-size:2.5rem; margin-bottom:0.8rem; }
+.overlay p { font-size:1.2rem; line-height:1.5; }
+
+.nav {
+  position:absolute; top:50%; transform:translateY(-50%); font-size:2rem; color:#fff;
+  cursor:pointer; user-select:none; padding:0.3rem 0.6rem; background:rgba(0,0,0,0.2); border-radius:50%;
+  transition: background 0.3s,color 0.3s; z-index:10;
+}
+.nav.left { left:15px; }
+.nav.right { right:15px; }
+.nav:hover { background: rgba(214,40,40,0.8); color:#fff; }
+
+/* Пагинация */
+.pagination {
+  position:absolute; bottom:15px; left:50%; transform:translateX(-50%);
+  display:flex; gap:0.5rem; z-index:10;
+}
+.pagination span {
+  width:12px; height:12px; border-radius:50%; background:rgba(255,255,255,0.4);
+  cursor:pointer; transition: background 0.3s;
+}
+.pagination span.active { background:#fff; }
+
+.about { background:#111; color:#e0e0e0; padding:3rem 1.5rem; margin:2rem auto; border-radius:12px; max-width:900px; }
+.about h2 { font-family:'Montserrat',sans-serif; font-size:2rem; color:#fff; margin-bottom:1rem; text-align:center; text-shadow:0 0 8px #000; }
+.about p { font-size:1.1rem; line-height:1.6; text-align:justify; margin-bottom:1rem; }
+
+footer { text-align:center; padding:1rem; font-size:0.9rem; color:#666; margin-top:2rem; }
+
+.social-buttons { display:flex; justify-content:center; gap:1rem; padding:2rem; background:#111; border-radius:12px; max-width:900px; margin:2rem auto; }
+.social-buttons a img { width:60px; height:60px; border-radius:12px; transition: transform 0.3s, box-shadow 0.3s; }
+.social-buttons a img:hover { transform:scale(1.1); box-shadow:0 0 15px rgba(255,140,0,0.7); }
+
+/* =========================
+   Мобильные устройства
+========================= */
+@media (max-width: 768px) {
+  .slider { height:400px; }
+  .overlay h2 { font-size:1.8rem; }
+  .overlay p { font-size:1rem; }
+  .site-header { padding:1rem 3%; }
+  .logo { font-size:1.1rem; }
+  .nav { font-size:1.5rem; padding:0.2rem 0.5rem; }
+  .social-buttons a img { width:50px; height:50px; }
+  .about { padding:2rem 1rem; }
+}
+
+@media (max-width: 480px) {
+  .slider { height:300px; }
+  .overlay h2 { font-size:1.4rem; }
+  .overlay p { font-size:0.9rem; }
+  .nav { font-size:1.2rem; padding:0.15rem 0.4rem; }
+  .social-buttons { flex-wrap:wrap; gap:0.5rem; padding:1rem; }
+  .social-buttons a img { width:40px; height:40px; }
+  .about { padding:1.5rem 1rem; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="logo"><img src="emblem.png" alt="Логотип Stajor"><span>Проект "Стажер"</span></div>
+</header>
+
+<div class="slider">
+  <div class="slides">
+    <div class="slide" style="background-image:url('slide1.jpg');"><div class="overlay"><h2>"СТАЖЕР"</h2><p></p></div></div>
+    <div class="slide" style="background-image:url('slide2.jpg');"><div class="overlay"><h2>КОРПОРАТЫ</h2><p>Высокоорганизованная форма жизни, которая пытается освоиться на Земле. Их цели не до конца ясны... Но их технологии поражают </p></div></div>
+    <div class="slide" style="background-image:url('slide3.jpg');"><div class="overlay"><h2>НЕЧИСТЫЕ</h2><p>Мистические существа, чье присутствие носит скорее бытовой характер</p></div></div>
+    <div class="slide" style="background-image:url('slide4.jpg');"><div class="overlay"><h2>СВЯТЫНЯ</h2><p>Культ страых богов... А может это ангелы?</p></div></div>
+  </div>
+  <div class="nav left">&#10094;</div>
+  <div class="nav right">&#10095;</div>
+  <div class="pagination"></div>
+</div>
+
+<section class="about" id="about">
+  <div class="container">
+    <h2>О нас</h2>
+    <p> Уже более чем 300 лет мы занимаемся выялвением аномалий и предотвращением несчастынх случаев на человеческих работах. К сожалению не можем желать Вам стать нашим клинетом, но если найдете запись - все же оставьте отзыв. </p>
+  </div>
+</section>
+
+<section class="about social-buttons">
+  <a href="#"><img src="telegram.jpg" alt="Telegram"></a>
+  <a href="#"><img src="youtube.jpg" alt="YouTube"></a>
+  <a href="#"><img src="tiktok.jpg" alt="TikTok"></a>
+  <a href="#"><img src="boosty.jpg" alt="Boosty"></a>
+</section>
+
+<footer>© 2025 Stajor.ru | Все права защищены</footer>
+
+<script>
+const slides = document.querySelector('.slides');
+const slideElems = document.querySelectorAll('.slide');
+const slideCount = slideElems.length;
+let index = 0;
+
+// Создаем пагинацию
+const pagination = document.querySelector('.pagination');
+slideElems.forEach((s,i)=>{
+  const dot = document.createElement('span');
+  if(i===0) dot.classList.add('active');
+  dot.addEventListener('click', ()=>showSlide(i));
+  pagination.appendChild(dot);
+});
+const dots = pagination.querySelectorAll('span');
+
+function showSlide(i){
+  index = (i + slideCount) % slideCount;
+  slides.style.transform = `translateX(-${index*100}%)`;
+  dots.forEach(d=>d.classList.remove('active'));
+  dots[index].classList.add('active');
+}
+
+// Стрелки
+document.querySelector('.nav.left').addEventListener('click', ()=>showSlide(index-1));
+document.querySelector('.nav.right').addEventListener('click', ()=>showSlide(index+1));
+
+// Свайп мышкой/сенсор
+let startX=0, isDragging=false;
+slides.addEventListener('mousedown', e=>{ startX=e.pageX; isDragging=true; slides.style.cursor='grabbing'; });
+slides.addEventListener('mouseup', e=>{
+  if(!isDragging) return;
+  let diff=e.pageX-startX;
+  if(diff>50) showSlide(index-1);
+  else if(diff<-50) showSlide(index+1);
+  isDragging=false; slides.style.cursor='grab';
+});
+slides.addEventListener('mouseleave', ()=>{ isDragging=false; slides.style.cursor='grab'; });
+
+slides.addEventListener('touchstart', e=>startX=e.touches[0].clientX);
+slides.addEventListener('touchend', e=>{
+  let diff = e.changedTouches[0].clientX - startX;
+  if(diff>50) showSlide(index-1);
+  else if(diff<-50) showSlide(index+1);
+});
+</script>
+
+</body>
+</html>
